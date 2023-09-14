@@ -28,9 +28,15 @@ This is the life cycle method that notifies the UI about new values and this tri
 
 In this app we have provide two simple components available in the navbar to illustrate the behavior of life cycle methods on component rerendering.
 
-1. **LifeCycle**: It is comprised to a parent component with a counter state variable and a button to increment ir. The parent render a child component that receives the counter value as a parameter. By clicking on this option and playing with the increment button, one can visualize the sequence of calls of all the main six methods mentioned above. We recommend also to open the developer tools and also follow the several logs shown in the console.
+1. **LifeCycle**: It is comprised of a parent component with a counter state variable and a button to increment it. The parent render a child component that receives the counter value as a parameter. By playing with the increment button, one can visualize the sequence of calls of all the main six methods mentioned above. We recommend also to open the developer tools and also follow the several logs shown in the console.
 
-2. **StateHasChanged**: By clicking on this item,one can experiment with a counter where the button onclick handler is an asynchronous method that makes four increments, each after each second. Again, we recommend open dev tools and observe the several logs in the console.
+2. **StateHasChanged**: By clicking on this item, one can experiment with a counter where the button onclick handler is an asynchronous method that makes four increments, each after one second. Again, we recommend open dev tools and observe the several logs in the console.
 
    - Automatic renders occur after the first and last increments of `currentCount`.
    - Manual renders are triggered by calls to `StateHasChanged` when the framework doesn't automatically trigger rerenders at intermediate processing points where currentCount is incremented.
+
+## How to Run this app (development mode)
+
+- run the command `dotnet watch run`
+
+This project was created by running `dotnet new blazorwasm -o BlazorLifeCycle`
