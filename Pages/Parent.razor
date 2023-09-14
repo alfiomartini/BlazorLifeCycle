@@ -1,0 +1,14 @@
+@page "/lifecycle"
+
+<h4>Parent Component</h4>
+<button class="btn  btn-secondary m-2" @onclick="@Increment">Increment Counter</button>
+<hr>
+<Child Counter="@Counter" />
+
+@code {
+    public int Counter { get; set; }
+    private void Increment()
+    {
+        Counter++;
+    }
+}

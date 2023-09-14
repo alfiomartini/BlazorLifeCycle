@@ -1,0 +1,79 @@
+<h5></h5>
+<h6>Counter: @Counter</h6>
+<h6><em>Life cycle events called according to the order of execution as per specification</em></h6>
+<hr />
+
+<section>
+    @foreach (var item in Events)
+    {
+        <h6>@item</h6>
+        <hr />
+    }
+</section>
+
+
+@code {
+    [Parameter]
+    public int Counter { get; set; }
+    List<string> Events = new();
+    // OnInitialized and OnInitilizedAsync are called before the component is rendered.
+    // They are very usefull to fill all the objects that are bound in the component.
+    protected override void OnInitialized()
+    {
+        Events.Add($" OnInitialized: {Counter}");
+        Console.WriteLine($"OnInitialized: {Counter}");
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        Events.Add($"OnInitializedAsync: {Counter}");
+        Console.WriteLine($"OnInitializedAsync: {Counter}");
+        return Task.CompletedTask;
+    }
+
+    // OnParametersSet and OnParametersSetAsync are invoked by 2 triggers:
+    // 1. Eevery time new parameters are received from the parent.
+    // 2. Also, when the component is loaded for the first time, these methods
+    // are called after OnIntialized() and OnInitializedAsync()
+    protected override void OnParametersSet()
+    {
+        Events.Add($"OnParametersSet - Counter: {Counter}");
+        Console.WriteLine($"OnParametersSet - Counter: {Counter}");
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        Events.Add($"OnParametersSetAsync - Counter: {Counter}");
+        Console.WriteLine($"OnParametersSetAsync - Counter: {Counter}");
+        return Task.CompletedTask;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Events.Add($"OnAfterRender - First Render : {Counter}");
+            Console.WriteLine($"OnAfterRender - First Render : {Counter}");
+        }
+        else
+        {
+            Events.Add($"OnAfterRender - After the First Render: {Counter}");
+            Console.WriteLine($"OnAfterRender - After the First Render: {Counter}");
+        }
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Events.Add($"OnAfterRenderAsync - First Render : {Counter}");
+            Console.WriteLine($"OnAfterRenderAsync - First Render : {Counter}");
+        }
+        else
+        {
+            Events.Add($"OnAfterRenderAsync: - After the First Render: {Counter}");
+            Console.WriteLine($"OnAfterRenderAsync: - After the First Render: {Counter}");
+        }
+        return Task.CompletedTask;
+    }
+}
